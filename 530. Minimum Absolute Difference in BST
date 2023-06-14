@@ -1,0 +1,30 @@
+#include <climits>
+
+class Solution {
+private:
+    int minDiff = INT_MAX;
+    int prevVal = INT_MAX;
+    
+public:
+    int getMinimumDifference(TreeNode* root) {
+        inorderTraversal(root);
+        return minDiff;
+    }
+    
+private:
+    void inorderTraversal(TreeNode* node) {
+        if (node == nullptr) {
+            return;
+        }
+        
+        inorderTraversal(node->left);
+        
+        if (prevVal != INT_MAX) {
+            minDiff = min(minDiff, abs(node->val - prevVal));
+        }
+        
+        prevVal = node->val;
+        
+        inorderTraversal(node->right);
+    }
+};
