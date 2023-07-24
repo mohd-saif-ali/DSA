@@ -1,0 +1,25 @@
+class Solution {
+public:
+    double myPow(double x, int n) {
+        if (n == 0 || x == 1.0) {
+            return 1.0;
+        }
+
+        if (x == 0.0) {
+            return 0.0;
+        }
+
+        double ans = 1.0;
+        long long absN = llabs(n); // Use a long long to avoid overflow when n = INT_MIN
+
+        while (absN > 0) {
+            if (absN % 2 == 1) {
+                ans *= x;
+            }
+            x *= x;
+            absN /= 2;
+        }
+
+        return n < 0 ? 1.0 / ans : ans;
+    }
+};
