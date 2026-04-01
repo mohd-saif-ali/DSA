@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int missingNumber(std::vector<int>& nums) {
+    std::sort(nums.begin(), nums.end());
+
+    for (int i = 0; i < nums.size(); i++) {
+        if (nums[i] != i)        // value should equal index if nothing is missing
+            return i;
+    }
+
+    return nums.size();          // missing number is n (the last one)
+}
+
+int main() {
+    std::vector<int> nums = {0, 2, 3, 1, 4};
+    std::cout << "Missing number: " << missingNumber(nums) << std::endl; // 5
+    return 0;
+}
+```
+
+---
+
+## How it works
+
+After sorting, the array **should look like `[0, 1, 2, 3, ...]`** — every value should match its index. The first place where `nums[i] != i` is the gap.
+```
+Sorted: [0, 1, 2, 3, 4]
+Index:   0  1  2  3  4
+
+nums[0] == 0  ✓
+nums[1] == 1  ✓
+nums[2] == 2  ✓
+nums[3] == 3  ✓
+nums[4] == 4  ✓
+
+No mismatch found → missing number is n = 5  ✓
+```
+
+Another example with `[3, 0, 1]`:
+```
+Sorted: [0, 1, 3]
+Index:   0  1  2
+
+nums[0] == 0  ✓
+nums[1] == 1  ✓
+nums[2] == 3  ✗ → return index 2  ✓
