@@ -1,0 +1,31 @@
+class Solution{
+public:
+    int longestSubarray(vector<int> &nums, int k){
+        int size = nums.size();
+        int sum = 0;
+        int lsa = 0;
+        int count = 0;
+        int prev = 0;
+
+        for(int i = 0; i < size; i++)
+        {
+            sum += nums[i];   // ✅ always add current element first
+            count++;
+
+            while(sum > k)    // ✅ shrink from left until sum <= k
+            {
+                sum -= nums[prev];
+                prev++;
+                count--;
+            }
+
+            if(sum == k)      // ✅ fixed typo K → k, check after adjusting
+            {
+                if(count > lsa)
+                    lsa = count;
+            }
+        }
+
+        return lsa;
+    }
+};
