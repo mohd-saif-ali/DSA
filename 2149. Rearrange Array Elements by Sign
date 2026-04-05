@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int> res(nums.size());
+        int odd=1;
+        int even=0;
+        for(int x: nums)
+        {
+            if(x>0)
+            {
+                res[even]=x;
+                even=even+2;
+            }
+            else{
+                res[odd]=x;
+                odd=odd+2;
+            }
+        }
+        return res;
+    }
+};
