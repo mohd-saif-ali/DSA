@@ -1,0 +1,13 @@
+vector<int> result;
+int maxFromRight = nums[size-1];
+result.push_back(maxFromRight);
+
+for(int i = size-2; i >= 0; i--) {
+    if(nums[i] > maxFromRight) {
+        maxFromRight = nums[i];      // update running max
+        result.push_back(nums[i]);
+    }
+}
+
+reverse(result.begin(), result.end());
+return result;
